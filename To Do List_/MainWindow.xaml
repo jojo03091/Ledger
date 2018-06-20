@@ -1,0 +1,47 @@
+﻿<Window x:Class="To_Do_List_.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:To_Do_List_"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="300" Closed="Window_Closed" Loaded="Window_Loaded">
+    
+         <!-- 分行、標題 -->
+        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock VerticalAlignment="Center" Margin="15 0">2018/05/17</TextBlock>
+        
+        <!-- 待辦事項 -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Grid.Row="1">
+                <StackPanel x:Name="ToDoStack">
+                    <local:ToDoItem IsChecked="False"></local:ToDoItem>
+                </StackPanel>
+                <Button x:Name="AddBtn" Click="AddBtn_Click">Adds</Button>
+                <!--<Grid x:Name="AddBtn">
+                <Rectangle Width="300" Height="30" Fill="Gray"></Rectangle>
+                <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center">Add</TextBlock>
+            </Grid>-->
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- 按鈕 -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Grid x:Name="OpenBtn">
+                <Rectangle Width="147" Height="50" Fill="Black"></Rectangle>
+                <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center">Open</TextBlock>
+            </Grid>
+
+            <Grid x:Name="SaveBtn">
+                <Rectangle Width="147" Height="50" Fill="Black"></Rectangle>
+                <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center">Save</TextBlock>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>
