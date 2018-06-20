@@ -15,64 +15,36 @@ using System.Windows.Shapes;
 
 namespace To_Do_List_
 {
-    /// <summary>
-    /// ToDoItem.xaml 的互動邏輯
-    /// </summary>
     public partial class ToDoItem : UserControl
     {
-        public bool IsChecked
-        {
-            set
-            {
-                if (value == true)
-                {
-                    CheckMark.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    CheckMark.Visibility = Visibility.Collapsed;
-                }
-            }
-            get
-            {
-                if (CheckMark.Visibility == Visibility)
-                    return true;
-                else
-                    return false;
-            }
-        }
-
-
-        private void CheckBox_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (CheckMark.Visibility == Visibility)
-            {
-                CheckMark.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                CheckMark.Visibility = Visibility.Visible;
-            }
-        }
-
         public ToDoItem()
         {
             InitializeComponent();
         }
 
-        // 自訂方法 : 取得輸入文字
-            public string ItemName
+        public int PriceValue
+        {
+            get
             {
-                get
+                //價格
+                try
                 {
-                    return ItemNameTb.Text;
+                    return int.Parse(Price.Text);
                 }
-                set
+                //要求輸入數字
+                catch
                 {
-                    ItemNameTb.Text = value;
+                    MessageBox.Show("請輸入數字");
+                    return 0;
                 }
+            }
+      
+            set
+            {
+                Price.Text = value.ToString();
             }
 
         }
+    }
 }
 

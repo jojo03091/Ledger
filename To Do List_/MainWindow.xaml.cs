@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace To_Do_List_
 {
-    /// <summary>
-    /// MainWindow.xaml 的互動邏輯
-    /// </summary>
+
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -25,59 +23,79 @@ namespace To_Do_List_
             InitializeComponent();
         }
 
-        private void AddBtn_Click(object sender, RoutedEventArgs e)
-        {
-            // 建立元件
-            ToDoItem item = new ToDoItem();
-
-            // 放入到 StackPanel
-            ToDoStack.Children.Add(item);
-        }
-
-        // 關閉視窗的事件
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            string data = "";
-
-            foreach (ToDoItem item in ToDoStack.Children)
-            {
-                // 打勾符號
-                if (item.IsChecked == true)
-                    data += "+";
-                else
-                    data += "-";
-
-                // 文字
-                data += "|" + item.ItemName + "\r\n";
-            }
-
-            // 存檔
-            System.IO.File.WriteAllText(@"C:\Users\w401\Desktop\data.txt", data);
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // 讀檔
-            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\w401\Desktop\data.txt");
+            // 開啟檔案
+            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\user\Desktop\github.txt");
 
-            // 逐行產生元件
+            // 分析
             foreach (string line in lines)
             {
-                // 用符號分隔
-                string[] parts = line.Split('|');
+                // 隔開
+                string[] parts = line.Split(',');
 
-                // 建立元件
-                ToDoItem item = new ToDoItem();
-                item.ItemName = parts[1];
 
-                if (parts[0] == "+")
-                    item.IsChecked = true;
-                else
-                    item.IsChecked = false;
+                ToDoItem price = new ToDoItem();
 
-                // 放入到 StackPanel
-                ToDoStack.Children.Add(item);
+                //讀取
+                price.Date.Text = parts[0];
+                price.Item.Text = parts[1];
+                price.Price.Text = parts[2];
+
+                //增加項目
+                LedgerTask.Children.Add(price);
             }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs Total)
+        {
+
+            int addPrice = 0;
+
+            //按enter計算
+            if (Total.Key == Key.Enter)
+            {
+
+                foreach (ToDoItem prices in LedgerTask.Children)
+                {
+
+                    addPrice += prices.PriceValue;
+                }
+
+                //顯示總支出
+                total.Text = addPrice.ToString();
+            }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            // 增加串列裝文字
+            List<string> datas = new List<string>();
+
+            // 轉換項目
+            foreach (ToDoItem price in LedgerTask.Children)
+            {
+                //設置字串
+                string data = "";
+
+                //資料區隔
+                data += price.Date.Text + "," + price.Item.Text + "," + price.Price.Text;
+
+
+                datas.Add(data);
+            }
+
+            System.IO.File.WriteAllLines(@"C:\Users\user\Desktop\github.txt", datas);
+        }
+
+
+        private void addTask_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // 產生
+            ToDoItem price = new ToDoItem();
+
+            //放入清單
+            LedgerTask.Children.Add(price);
         }
     }
 }

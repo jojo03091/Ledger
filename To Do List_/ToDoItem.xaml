@@ -6,38 +6,27 @@
              xmlns:local="clr-namespace:To_Do_List_"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    
-    
-    <Grid Width="300" Height="50" Background="White">
+
+
+    <Grid Background="White" Height="30" x:Name="HoleItem">
 
         <!-- 定義格子 -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="70"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="60"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <!-- 勾選框 -->
-        <Grid Grid.Column="0" x:Name="CheckBox" Background="Transparent" MouseDown="CheckBox_MouseDown">
-
-            <!-- 方框 -->
-            <Rectangle Width="20" Height="20" Stroke="Gray" StrokeThickness="2"></Rectangle>
-
-            <!-- 打勾 -->
-            <Canvas x:Name="CheckMark" Margin=" 0 10 0 0">
-                <Rectangle Width="7" Height="3" Fill="Green" Canvas.Left="21" Canvas.Top="13">
-                    <Rectangle.RenderTransform>
-                        <RotateTransform Angle="45"></RotateTransform>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
-                <Rectangle Width="9" Height="3" Fill="Green" Canvas.Left="22" Canvas.Top="17">
-                    <Rectangle.RenderTransform>
-                        <RotateTransform Angle="-45"></RotateTransform>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
-            </Canvas>
+        <!-- 日期 -->
+        <Grid Grid.Column="0" Background="Transparent">
+            <TextBox Margin="5" x:Name="Date" Foreground="Gray" BorderThickness="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Date</TextBox>
         </Grid>
 
-        <!-- 輸入框 -->
-        <TextBox x:Name="ItemNameTb" Grid.Column="1" VerticalContentAlignment="Center" BorderThickness="0">New Task</TextBox>
+        <!-- 內容 -->
+        <TextBox x:Name="Item" Grid.Column="1" Margin="10 0 0 0"  VerticalContentAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="0">Task</TextBox>
+
+        <!-- 價錢 -->
+        <TextBox x:Name="Price" Grid.Column="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" BorderThickness="0" Margin="5 5 10 5" Foreground="SkyBlue">0</TextBox>
+
     </Grid>
 </UserControl>
